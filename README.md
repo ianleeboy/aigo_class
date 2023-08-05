@@ -1,0 +1,2 @@
+# aigo_class
+practice
