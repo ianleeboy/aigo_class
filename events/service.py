@@ -47,7 +47,7 @@ services = {
 def service_category_event(event):
     image_carousel_template_message = TemplateSendMessage(
         alt_text='請選擇想預約的餐點類型',
-        template=ImageCarouselColumn(
+        template=ImageCarouselTemplate(
         columns = [
                 ImageCarouselColumn(
                             image_url= 'https://i.imgur.com/hmhKNfT.jpg',
