@@ -30,3 +30,26 @@ def handle_message(event):
 
     elif message_text == '@營業據點':
         location_event(event)
+
+@handler.add(FollowEvent)
+def handle_follow(event):
+    welcome_msg = """ Welcome!! 歡迎您成為 Oh MaMa 的好友~~ 
+    
+我是 Chicken 小精靈
+
+-想要知道我們有什麼餐點~還有最新的商品~
+-想要透過線上預約餐點也可以透過我~
+
+-期待您的訂餐"""
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=welcome_msg))
+
+
+@handler.add(UnfollowEvent)
+def handle_unfollow(event):
+    print(event)
+
+if __name__ == "__main__":
+    app.run()
