@@ -7,40 +7,50 @@ services = {
         'category': '套餐',
         'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
         'title': '炸雞類',
+        'duration': '10min',
         'description': '主餐有炸雞、雞塊、雞翅，搭配薯條跟飲料',
-        'price': 2000
+        'price': 2000,
+        'post_url': 'https://www.facebook.com/OhMAMAchicken/'
     },
     
     2:{
         'category': '套餐',
         'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
         'title': '熱狗堡',
+        'duration': '10min',
         'description': '現做的熱狗堡搭配薯條',
-        'price': 1000
+        'price': 1000,
+        'post_url': 'https://www.facebook.com/OhMAMAchicken/'
     },
 
     3:{
         'category': '套餐',
         'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
         'title': '多人分享',
+        'duration': '10min',
         'description': '與朋友一起大快朵頤的雞腿桶',
-        'price': 1500
+        'price': 1500,
+        'post_url': 'https://www.facebook.com/OhMAMAchicken/'
     },
 
     4:{
         'category': '單點',
         'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
         'title': '人氣點心',
+        'duration': '10min',
         'description': '造型薯條 & 特調醬',
-        'price': 500
+        'price': 500,
+        'post_url': 'https://www.facebook.com/OhMAMAchicken/'
     },
 
     5:{
         'category': '單點',
         'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
         'title': '飲料',
+        'duration': '10min',
         'description': '各式各樣的氣泡跟茶類飲料',
-        'price': 3000
+        'price': 3000,
+        'post_url': 'https://www.facebook.com/OhMAMAchicken/'
     }
 }
 
