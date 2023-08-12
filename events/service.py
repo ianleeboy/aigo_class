@@ -5,7 +5,7 @@ from urllib.parse import parse_qsl
 services = {
     1:{
         'category': '套餐',
-        'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
+        'img_url': 'https://i.imgur.com/rl7CRDq.jpg',
         'title': '炸雞類',
         'duration': '10min',
         'description': '主餐有炸雞、雞塊、雞翅，搭配薯條跟飲料',
@@ -15,7 +15,7 @@ services = {
     
     2:{
         'category': '套餐',
-        'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
+        'img_url': 'https://i.imgur.com/efDJWJx.jpg',
         'title': '熱狗堡',
         'duration': '10min',
         'description': '現做的熱狗堡搭配薯條',
@@ -25,7 +25,7 @@ services = {
 
     3:{
         'category': '套餐',
-        'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
+        'img_url': 'https://i.imgur.com/gYJcINJ.jpg',
         'title': '多人分享',
         'duration': '10min',
         'description': '與朋友一起大快朵頤的雞腿桶',
@@ -35,7 +35,7 @@ services = {
 
     4:{
         'category': '單點',
-        'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
+        'img_url': 'https://i.imgur.com/Y2JZOVt.jpg',
         'title': '人氣點心',
         'duration': '10min',
         'description': '造型薯條 & 特調醬',
@@ -48,7 +48,7 @@ services = {
         'img_url': 'https://i.imgur.com/hmhKNfT.jpg',
         'title': '飲料',
         'duration': '10min',
-        'description': '各式各樣的氣泡跟茶類飲料',
+        'description': '各式各樣的氣泡飲料',
         'price': 3000,
         'post_url': 'https://www.facebook.com/OhMAMAchicken/'
     }
@@ -60,7 +60,7 @@ def service_category_event(event):
         template=ImageCarouselTemplate(
         columns = [
                 ImageCarouselColumn(
-                            image_url= 'https://i.imgur.com/hmhKNfT.jpg',
+                            image_url= 'https://i.imgur.com/vyQIdkh.jpg',
                             action=PostbackAction(
                                 label= '套餐',
                                 display_text= '想了解套餐內容',
@@ -68,7 +68,7 @@ def service_category_event(event):
                             )
                 ),
                 ImageCarouselColumn(
-                            image_url= 'https://i.imgur.com/hmhKNfT.jpg',
+                            image_url= 'https://i.imgur.com/cJVuVXE.jpg',
                             action=PostbackAction(
                                 label= '單點',
                                 display_text= '想了解單點內容',
