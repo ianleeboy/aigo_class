@@ -73,13 +73,6 @@ def service_category_event(event):
         [image_carousel_template_message])
 
 
-
-
-
-
-
-
-
 def service_event(event):
 
     data = dict(parse_qsl(event.postback.data))
