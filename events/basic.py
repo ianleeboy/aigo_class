@@ -15,11 +15,12 @@ def about_us_event(event):
     ]
 
     text_message = TextSendMessage(text='''$ Oh! MaMa Chicken $
-獨家特調淋醬x美式炸雞＝Oh！美味
-目前僅提供網路預訂            ''', emojis=emoji)
+-獨家特調淋醬x美式炸雞 ~~ Oh!美味
+
+-目前僅提供網路預訂''', emojis=emoji)
     
     sticker_message = StickerSendMessage(
-        packed_id = '11537',
+        package_id = '11537',
         sticker_id = '52002740'
     )
 
@@ -32,8 +33,8 @@ def about_us_event(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        [text_message, sticker_message, image_message]
-    )
+        [text_message, sticker_message, image_message])
+
 
 def location_event(event):
     location_message = LocationSendMessage(
@@ -45,5 +46,4 @@ def location_event(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        location_message
-    )
+        location_message)
