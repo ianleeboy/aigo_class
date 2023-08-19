@@ -34,10 +34,27 @@ def callback():
 
     return 'OK'
 
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
     message_text = str(event.message.text).lower()
+    user = User.query.filter(User.line_id == event.source.user_id).first()
+
+    if not user:
+        profile = line_bot_api.get_profile(event.source.user_id)
+        print(profile.display_name)
+        print(profile.user_id)
+        print(profile.picture_url)
+
+        user = User(profile.user_id, profile.display_name, profile.picture_url)
+        db.session.add(user)
+        db.session.commit()
+
+    print(user.id)
+    print(user.line_id)
+    print(user.display_name)
+
 
     if message_text == '@關於我們':
         about_us_event(event)
