@@ -5,6 +5,7 @@ from extensions import db
 from models.user import User
 from models.reservation import Reservation
 
+import datetime
 
 services = {
     1:{
@@ -176,13 +177,73 @@ def service_event(event):
                 bubbles.append(bubble)
 
     flex_message = FlexSendMessage(
-         alt_text='請選擇訂餐項目',
-         contents={
-              "type": "carousel",
-              "contents": bubbles
-         }
+        alt_text='請選擇訂餐項目',
+        contents={
+            "type": "carousel",
+            "contents": bubbles
+        }
     )
 
     line_bot_api.reply_message(
-         event.reply_token,
-         [flex_message])
+        event.reply_token,
+        [flex_message])
+    
+
+def service_select_date_event(event):
+
+    data = dict(parse_qsl(event.postback.data))
+    
+    weekday_string ={
+        0: '日',
+        1: '一',
+        2: '二',
+        3: '三',
+        4: '四',
+        5: '五',
+        6: '六'
+    }
+
+    business_day = [1, 2, 3, 4, 5]
+
+    quick_reply_buttons = []
+
+    today = datetime.datetime.today().date()
+
+    for x in range(1, 8):
+        day = today + datetime.timedelta(days=x)
+
+        if day.weekday() in business_day:
+            quick_reply_button = QuickReplyButton(
+                action=PostbackAction(label=f'{day} ({weekday_string[day.weekday()]})',
+                                      text=f'我要預約 {day} ({weekday_string[day.weekday()]}) 這天',
+                                      data=f'action=confirm&service_id={data["service_id"]}&date={day}'))
+            quick_reply_buttons.append(quick_reply_button)
+
+    text_message = TextSendMessage(text='請問要預約哪一天?',
+                                   quick_reply=QuickReply(item=quick_reply_buttons))
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        [text_message])
+
+
+def service_select_time_event(event):
+     
+    data = dict(parse_qsl(event.postback.data))
+
+    available_time = ['11:00', '12:00', '13:00', '14:00']
+
+    quick_reply_buttons = []
+
+    for time in available_time:
+        quick_reply_button = QuickReplyButton(action=PostbackAction(label=time,
+                                                                    text=f'{time} 這個時段',
+                                                                    data=f'action=confirm&service_id={data["service_id"]}&date={data["date"]}&time={time}'))
+        quick_reply_buttons.append(quick_reply_button)
+
+    text_message = TextSendMessage(text='請問要預約哪個時段?',
+                                   quick_reply=QuickReply(item=quick_reply_buttons))
+    
+    line_bot_api.reply_message(
+        event.reply_token,
+        [text_message])
