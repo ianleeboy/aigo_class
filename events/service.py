@@ -220,7 +220,7 @@ def service_select_date_event(event):
             quick_reply_buttons.append(quick_reply_button)
 
     text_message = TextSendMessage(text='請問要預約哪一天?',
-                                   quick_reply=QuickReply(item=quick_reply_buttons))
+                                   quick_reply=QuickReply(items=quick_reply_buttons))
 
     line_bot_api.reply_message(
         event.reply_token,
@@ -242,7 +242,7 @@ def service_select_time_event(event):
         quick_reply_buttons.append(quick_reply_button)
 
     text_message = TextSendMessage(text='請問要預約哪個時段?',
-                                   quick_reply=QuickReply(item=quick_reply_buttons))
+                                   quick_reply=QuickReply(items=quick_reply_buttons))
     
     line_bot_api.reply_message(
         event.reply_token,
