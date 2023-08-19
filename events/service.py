@@ -194,22 +194,22 @@ def service_select_date_event(event):
     data = dict(parse_qsl(event.postback.data))
     
     weekday_string ={
-        0: '日',
-        1: '一',
-        2: '二',
-        3: '三',
-        4: '四',
-        5: '五',
-        6: '六'
+        0: '一',
+        1: '二',
+        2: '三',
+        3: '四',
+        4: '五',
+        5: '六',
+        6: '日'
     }
 
-    business_day = [1, 2, 3, 4, 5]
+    business_day = [1, 2, 3, 4, 5, 6]
 
     quick_reply_buttons = []
 
     today = datetime.datetime.today().date()
 
-    for x in range(1, 8):
+    for x in range(1, 11):
         day = today + datetime.timedelta(days=x)
 
         if day.weekday() in business_day:
