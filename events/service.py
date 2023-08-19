@@ -203,13 +203,13 @@ def service_select_date_event(event):
         6: '日'
     }
 
-    business_day = [1, 2, 3, 4, 5, 6]
+    business_day = [0, 1, 2, 3, 4]
 
     quick_reply_buttons = []
 
     today = datetime.datetime.today().date()
 
-    for x in range(1, 11):
+    for x in range(1, 8):
         day = today + datetime.timedelta(days=x)
 
         if day.weekday() in business_day:
@@ -247,3 +247,86 @@ def service_select_time_event(event):
     line_bot_api.reply_message(
         event.reply_token,
         [text_message])
+    
+
+def service_confirm_event(event):
+
+    data = dict(parse_qsl(event.postback.data))
+    booking_service = services[int(data['service_id'])]
+
+    confirm_template_message = TemplateSendMessage(
+        alt_text='請確認預約項目',
+        template=ConfirmTemplate(
+            text=f'您即將預約\n\n{booking_service["title"]} {booking_service["duration"]}\n預約時段: {data["date"]} {data["time"]}\n\n確認沒問題請按【確定】',
+            actions=[
+                PostbackAction(
+                    label='確定',
+                    display_text='確認沒問題',
+                    data=f'action=confirmed&service_id={data["service_id"]}&date={data["date"]}&time={data["time"]}'
+                ),
+                MessageAction(
+                    label='重新預約',
+                    text='我想重新預約'
+                )
+            ]
+        )
+    )
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        [confirm_template_message])
+
+
+def is_booked(event, user):
+    reservation = Reservation.query.filter(Reservation.user_id == user.id,
+                                           Reservation.is_canceled.is_(False),
+                                           Reservation.booking_datetime > datetime.datetime.now()).first()
+                                           
+    if reservation:
+        buttons_template_message = TemplateSendMessage(
+            alt_text='您已經有預約了，是否需要取消?',
+            template=ButtonsTemplate(
+                title='您已經有預約了',
+                text=f'{reservation.booking_service}\n預約時段: {reservation.booking_datetime}',
+                actions=[
+                    PostbackAction(
+                        label='我想取消預約',
+                        display_text='我想取消預約',
+                        data='action=cancel'
+                    )
+                ]
+            )
+        )
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            [buttons_template_message])
+
+        return True
+    else:
+        return False
+
+
+def service_confirmed_event(event):
+
+    data = dict(parse_qsl(event.postback.data))
+
+    booking_service = services[int(data['service_id'])]
+    booking_datetime = datetime.datetime.strptime(f'{data["date"]} {data["time"]}', '%Y-%m-%d %H:%M')
+
+    user = User.query.filter(User.line_id == event.source.user_id).first()
+    if is_booked(event, user):
+        return
+    
+    reservation = Reservation(
+        user_id=user.id,
+        booking_service_category=f'{booking_service["category"]}',
+        booking_service=f'{booking_service["title"]} {booking_service["duration"]}',
+        booking_datetime=booking_datetime)
+    
+    db.session.add(reservation)
+    db.session.commit()
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        [TextSendMessage(text='沒問題! 感謝您的預約，已經幫您預約成功了，記得要來取餐喔~')])

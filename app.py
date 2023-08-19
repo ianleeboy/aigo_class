@@ -83,7 +83,10 @@ def handle_postback(event):
         service_select_date_event(event)
     elif data.get('action') == 'select_time':
         service_select_time_event(event)
-
+    elif data.get('action') == 'confirm':
+        service_confirm_event(event)
+    elif data.get('action') == 'confirmed':
+        service_confirmed_event(event)
 
 
 @handler.add(FollowEvent)
