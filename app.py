@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 
 from events.basic import *
 from events.service import *
+from events.admin import *
 from line_bot_api import *
 
 from extensions import db, migrate
@@ -66,6 +67,11 @@ def handle_message(event):
     elif message_text == '@預約服務':
         service_category_event(event)
 
+    elif message_text.startswith('*'):
+        if event.source.user_id not in ['U636a012c9911a5eda79688a80bb2f7fd']:
+            return
+        if message_text in ['*data', '*d']:
+            list_reservation_event(event)
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
