@@ -51,6 +51,7 @@ def handle_message(event):
         db.session.add(user)
         db.session.commit()
 
+
     print(user.id)
     print(user.line_id)
     print(user.display_name)
