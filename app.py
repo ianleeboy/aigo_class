@@ -87,6 +87,8 @@ def handle_postback(event):
         service_confirm_event(event)
     elif data.get('action') == 'confirmed':
         service_confirmed_event(event)
+    elif data.get('action') == 'cancel':
+        service_cancel_event(event)
 
 
 @handler.add(FollowEvent)

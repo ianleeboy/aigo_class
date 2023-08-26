@@ -15,7 +15,9 @@ def about_us_event(event):
     ]
 
     text_message = TextSendMessage(text='''$ Oh! MaMa Chicken $
--獨家特調淋醬x美式炸雞 ~~ Oh!美味
+-獨家特調淋醬x美式炸雞 ~~ 
+                                   
+      Oh!美味 ~~
 
 -目前僅提供網路預訂''', emojis=emoji)
     
