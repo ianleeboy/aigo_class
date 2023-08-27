@@ -7,9 +7,9 @@ from models.reservation import Reservation
 import datetime
 
 def list_reservation_event(event):
-    user = User.query.filter(User.line_id == event.source.user_id).first()
     reservations = Reservation.query.filter(Reservation.is_canceled.is_(False),
-                                            Reservation.booking_datetime > datetime.datetime.now()
+                                            Reservation.booking_datetime > datetime.datetime.now(),
+                                            Reservation.user_id == event.source.user_id
                                             ).order_by(Reservation.booking_datetime.asc()).all()
     
     reservation_data_text = '## 預約名單: ## \n\n'
