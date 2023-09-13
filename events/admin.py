@@ -1,7 +1,7 @@
 from line_bot_api import *
 
 from extensions import db
-from models.user import User
+from models.user1 import User
 from models.reservation import Reservation
 
 import datetime

@@ -19,7 +19,8 @@ def about_us_event(event):
                                    
       Oh!美味 ~~
 
--目前僅提供網路預訂''', emojis=emoji)
+-目前僅提供網路預訂 ~
+-也歡迎使用LINE PAY來付款喔 ~''', emojis=emoji)
     
     sticker_message = StickerSendMessage(
         package_id = '11537',
